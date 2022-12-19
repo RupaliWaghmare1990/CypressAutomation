@@ -4,23 +4,34 @@
 import Login from '../../../support/PageObjects/Login'
  const login =new Login()
 
-// import { Given, When,Then ,And } from "cypress-cucumber-preprocessor/steps";
-// Given ('I open Create Company form ',()=>
-// {
-//     cy.get('.block').click()
-//     cy.wait(4000)
-// })
 
+Cypress.on('uncaught:exception',(err,runnable) =>{
+return false
+})
 
 beforeEach(()=>
 {
 
     cy.fixture('LogInForm').then(function(data)
     {
-        this.data=data
+        this.data=data})
 
-    })
-});
+        cy.intercept({
+        method: 'POST',
+        url: 'https://service-development.ordant.com:8000/v3/companies',
+        
+      }).as('createCom')
+      
+      cy.intercept('POST', 'https://service-development.ordant.com:8000/v3/authenticate').as('authenticate')
+
+
+
+
+})
+//'https://service-development.ordant.com:8000/v3/contact'
+
+
+
 describe('My first test ', function() 
     {
 
@@ -29,40 +40,98 @@ describe('My first test ', function()
             Cypress.on('uncaught:exception', (err, runnable) => {
             return false;
             });
-        cy.visit("https://development-v4.ordant.com/",{failOnStatusCode:false })
-
-        
-        cy.wait(8000)
-        login.EnterUserName().clear().type(this.data.Username)
-        login.EnterPassword().clear().type(this.data.Password)
+            cy.visit('/',{failOnStatusCode:false })
+            cy.wait(8000)
+            login.EnterUserName().clear().type(this.data.Username)
+            login.EnterPassword().clear().type(this.data.Password)
     
-        login.ClickSignInButton().click().then(function()
+            login.ClickSignInButton().click()
+            
+        
+            cy.wait(10000)
+            cy.wait('@authenticate').its('response.statusCode').should('eq', 200)
+            cy.wait(10000)
+            cy.visit('/companies',{failOnStatusCode:false})
+ 
+           // cy.wait(10000)
+
+             //cy.url().should('contain', '/companies')
+            //cy.url().should('include','/companies')
+            cy.log('....Successfully')
+        
+    
+          
+            cy.contains('Create Company').click({force: true})
+            cy.get('#companyNameId').type("ORDANT").type('{enter}')
+            cy.xpath("//button[@type='submit']").click({force: true})
+           
+
+           // cy.intercept('POST','**/companies/').as('companies')
+             cy.get('button.q-btn[type=submit]').click()
+            
+            .its('response.body')
+                .then((body) => {
+                  // cy.wait('@createCom')
+                 //const bodyData = JSON.parse(responce.body)
+                  cy.log(JSON.stringify(body))
+                 })
+
+
+          
+            cy.wait(10000)
+            cy.wait(2000)
+         
+            })
+
+
+
+            
+        it.skip('My first test case',function ()
         {
+            cy.visit('/',{failOnStatusCode:false })
+            cy.wait(8000)
+            login.EnterUserName().clear().type(this.data.Username)
+            login.EnterPassword().clear().type(this.data.Password)
+            login.ClickSignInButton().click().then(function()
+            { 
+                cy.intercept({
+
+                        method:'GET',
+                        url: 'https://test-suite-v4.ordant.com/'
+                    }).then((resp) => {
+                        const bodyData = JSON.parse(resp.body)
+                        cy.log(JSON.stringify(body))
+                            return companies
+
+                     })
+                     //.then((companies)=>
+                    // {cy.request({
+                    //     method: 'GET',
+                    //     url: 'https://service-development.ordant.com:8000/v3/' +companies
+                    // })
+
+
+
+
+                
+
+            })
         
-      cy.visit("https://development-v4.ordant.com/companies",{failOnStatusCode:false})
+                
 
         })
-        cy.wait(10000)
-       
-       
-        cy.url().should('contain', '/companies')
-        //cy.url().should('include','/companies')
-        cy.log('....Successfully')
-        
-    
-
-       cy.get('.text-sm > .q-btn > .q-btn__content > .block').click()
-       cy.wait(1000)
-
-       cy.get('input[type=text]').should('have.lenght',3).type('ORDANT')
-      
-       //cy.get('.q-field__native q-placeholder text-[14px] text-gray-700').should('have.length',3)
-      
-       //cy.get('').type('ORDANT ')
 
 
-       //cy.contains('Add Company').should('have.length',11).click()
-       //cy.contains('Cancel').click()
-        })
 
+
+
+
+
+
+            
+          
+
+           
     })
+       
+ 

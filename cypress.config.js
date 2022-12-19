@@ -3,15 +3,21 @@ const cucumber = require('cypress-cucumber-preprocessor').default
 
 module.exports = defineConfig({
   e2e: {
+
+    baseUrl: 'https://test-suite-v4.ordant.com',
+  
     setupNodeEvents(on, config) {
+      
+
+      defaultCommandTimeout: 10000
       on('file:preprocessor', cucumber())
 
-      baseUrl: 'https://development-v4.ordant.com'
+      
       // implement node event listeners here
     },
 
-    specPattern:'cypress/Integration/Ordant/*.feature'
-   //specPattern:'cypress/Integration/Ordant/AddCompany/*.js'
+   // specPattern:'cypress/Integration/Ordant/*.feature'
+   specPattern:'cypress/Integration/Ordant/AddCompany/AddComStepdef.js'
     //specPattern:'cypress/*.feature'
   },
-});
+})

@@ -13,7 +13,7 @@ EnterPassword()
 
 ClickSignInButton()
 {
-   return cy.get('.q-form > .q-btn > .q-btn__content')
+   return cy.xpath("(//span[@class='block'])[2]")
 }
 
 

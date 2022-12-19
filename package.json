@@ -5,13 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "node_modules\\.bin\\cypress run",
-    "headtest":"npm run test -- --headed",
-    "chromeTest":"npm run test -- --browser chrome",
-    "OrdantTest" : "npm run test -- --spec \"cypress/Integration/Ordant/*\""
-
-
-
-
+    "headtest": "npm run test -- --headed",
+    "chromeTest": "npm run test -- --browser chrome",
+    "OrdantTest": "npm run test -- --spec \"cypress/Integration/Ordant/*\""
   },
   "author": "",
   "license": "ISC",
@@ -19,20 +15,10 @@
     "cypress": "^11.2.0",
     "cypress-cucumber-preprocessor": "^4.3.1"
   },
-
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true
+  },
+  "dependencies": {
+    "cypress-xpath": "^2.0.1"
   }
-   
-  
-
-   
-    
-   
-
-
-
-
-
-
 }

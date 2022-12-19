@@ -11,6 +11,9 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+require('cypress-xpath')
+//baseUrl: 'https://development-v4.ordant.com/companies'
+
 //
 //
 // -- This is a child command --
@@ -23,6 +26,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.on('uncaught:exception',(err,runnable) =>{
 
-
-
+    return false
+})
