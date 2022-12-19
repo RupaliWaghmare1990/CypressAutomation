@@ -26,9 +26,6 @@ beforeEach(()=>
 
 
 })
-//'https://service-development.ordant.com:8000/v3/contact'
-
-
 
 describe('My first test ', function() 
     {
@@ -44,8 +41,6 @@ describe('My first test ', function()
             login.EnterPassword().clear().type(this.data.Password)
     
             login.ClickSignInButton().click()
-            
-        
             cy.wait(10000)
             cy.wait('@authenticate').its('response.statusCode').should('eq', 200)
             cy.wait(10000)
