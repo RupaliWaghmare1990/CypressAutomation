@@ -3,8 +3,6 @@
  import { should } from 'chai';
 import Login from '../../../support/PageObjects/Login'
  const login =new Login()
-
-
 Cypress.on('uncaught:exception',(err,runnable) =>{
 return false
 })
@@ -20,10 +18,7 @@ beforeEach(()=>
         url: 'https://service-development.ordant.com:8000/v3/companies',
         
       }).as('createCom')
-      
       cy.intercept('POST', 'https://service-development.ordant.com:8000/v3/authenticate').as('authenticate')
-
-
 })
 
 describe('My first test ', function() 
@@ -54,8 +49,7 @@ describe('My first test ', function()
             cy.get('#companyNameId').type("ORDANT").type('{enter}')
             cy.xpath("//button[@type='submit']").click({force: true})
            
-
-           // cy.intercept('POST','**/companies/').as('companies')
+          // cy.intercept('POST','**/companies/').as('companies')
              cy.get('button.q-btn[type=submit]').click()
             
             .its('response.body')
@@ -94,8 +88,7 @@ describe('My first test ', function()
                     // })
 
             })
-        
-                
+                       
 
         })
 

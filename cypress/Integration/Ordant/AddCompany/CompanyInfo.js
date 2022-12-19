@@ -34,11 +34,7 @@ describe('My first test ', function()
                         method: 'GET',
                         url: 'https://service-development.ordant.com:8000/v3/' +companies
                     })
-
-
-
-
-                    })
+ })
 
             })
         

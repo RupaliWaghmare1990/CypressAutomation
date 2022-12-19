@@ -16,7 +16,5 @@ ClickSignInButton()
    return cy.xpath("(//span[@class='block'])[2]")
 }
 
-
-
 }
 export default Login;

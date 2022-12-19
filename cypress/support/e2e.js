@@ -20,7 +20,5 @@ import './commands'
 // require('./commands')
 
 cy.on('uncaught:exception', (err, runnable) => {
-
-
-    return false
+ return false
 }) 
