@@ -25,8 +25,6 @@ beforeEach(()=>
       cy.intercept('POST', 'https://service-development.ordant.com:8000/v3/authenticate').as('authenticate')
 
 
-
-
 })
 //'https://service-development.ordant.com:8000/v3/contact'
 
